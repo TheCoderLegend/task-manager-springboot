@@ -247,7 +247,6 @@ curl -X POST http://localhost:8080/tasks \
 * Pagination & Sorting
 * Logging
 * Docker Support
-* Deployment (AWS / Render)
 
 ---
 

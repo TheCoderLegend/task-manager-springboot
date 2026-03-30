@@ -26,21 +26,26 @@ public class TaskService {
     public List<Task> getAllTasks() {
         return repository.findAll();
     }
-    public Task getTaskById(String id) {
-    return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
-}
 
-public Task updateTask(String id, Task updatedTask) {
-    return repository.findById(id).map(task -> {
-        task.setTitle(updatedTask.getTitle());
-        task.setDescription(updatedTask.getDescription());
-        task.setCompleted(updatedTask.isCompleted());
-        task.setUpdatedAt(LocalDateTime.now());
-        return repository.save(task);
-    }).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
-}
-public void deleteTask(String id) {
-    repository.deleteById(id);
-}
+    public Task getTaskById(String id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+    }
+
+    public Task updateTask(String id, Task updatedTask) {
+        return repository.findById(id).map(task -> {
+            task.setTitle(updatedTask.getTitle());
+            task.setDescription(updatedTask.getDescription());
+            task.setCompleted(updatedTask.isCompleted());
+            task.setUpdatedAt(LocalDateTime.now());
+            return repository.save(task);
+        }).orElseThrow(() -> new ResourceNotFoundException("Task not found"));
+    }
+
+    public void deleteTask(String id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("Task not found");
+        }
+        repository.deleteById(id);
+    }
 
 }
