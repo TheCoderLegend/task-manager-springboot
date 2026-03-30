@@ -1,51 +1,260 @@
-# Task Manager API 🚀
+# 🚀 Task Manager API (Spring Boot + MongoDB)
 
-A simple backend application built using Spring Boot and MongoDB.
+A production-ready backend application built using **Spring Boot** and **MongoDB** that provides REST APIs to manage tasks efficiently.
 
-## Features
+---
 
-* Create Task
-* Get All Tasks
-* Get Task by ID
-* Update Task
-* Delete Task
-* Validation & Error Handling
+## 📌 📖 Project Overview
 
-## Tech Stack
+This project is a **Task Management REST API** that allows users to:
 
-* Java
+* Create tasks
+* View all tasks
+* Get task by ID
+* Update tasks
+* Delete tasks
+
+It follows **clean architecture principles** and includes:
+
+* Validation
+* Global Exception Handling
+* MongoDB integration
+
+---
+
+## 🧱 🏗️ Architecture
+
+```
+Controller → Service → Repository → MongoDB
+```
+
+### 📂 Project Structure
+
+```
+src/main/java/com/vishnu/taskmanager
+│
+├── controller        # REST Controllers
+├── service           # Business Logic
+├── repository        # Database Layer
+├── model             # Entity Classes
+├── exception         # Global Exception Handling
+```
+
+---
+
+## ⚙️ 🛠️ Tech Stack
+
+* Java 17+
 * Spring Boot
 * MongoDB
+* Spring Data MongoDB
 * Maven
 
-## API Endpoints
+---
 
-### Create Task
+## 🚀 ▶️ How to Run Locally
 
-POST /tasks
+### 🔹 1. Clone the Repository
 
-### Get All Tasks
+```bash
+git clone https://github.com/TheCoderLegend/task-manager-springboot.git
+cd task-manager-springboot
+```
 
-GET /tasks
+---
 
-### Get Task by ID
+### 🔹 2. Start MongoDB
 
-GET /tasks/{id}
+```bash
+mongod
+```
 
-### Update Task
+---
 
-PUT /tasks/{id}
+### 🔹 3. Configure Database
 
-### Delete Task
+Update:
 
-DELETE /tasks/{id}
+```
+src/main/resources/application.properties
+```
 
-## Run Locally
+```properties
+spring.data.mongodb.uri=mongodb://localhost:27017/taskdb
+```
+
+---
+
+### 🔹 4. Run the Application
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-## Author
+---
 
-Vishnu V R
+### 🔹 5. Server Runs At
+
+```
+http://localhost:8080
+```
+
+---
+
+## 📡 🔗 API Endpoints
+
+### ✅ Create Task
+
+```http
+POST /tasks
+```
+
+#### Request Body:
+
+```json
+{
+  "title": "Learn Spring Boot",
+  "description": "Build REST API",
+  "completed": false
+}
+```
+
+#### Response:
+
+```json
+{
+  "id": "65f1abc123",
+  "title": "Learn Spring Boot",
+  "description": "Build REST API",
+  "completed": false,
+  "createdAt": "2026-03-30T10:30:00",
+  "updatedAt": null
+}
+```
+
+---
+
+### ✅ Get All Tasks
+
+```http
+GET /tasks
+```
+
+---
+
+### ✅ Get Task By ID
+
+```http
+GET /tasks/{id}
+```
+
+---
+
+### ✅ Update Task
+
+```http
+PUT /tasks/{id}
+```
+
+#### Request Body:
+
+```json
+{
+  "title": "Updated Task",
+  "description": "Updated description",
+  "completed": true
+}
+```
+
+---
+
+### ❌ Delete Task
+
+```http
+DELETE /tasks/{id}
+```
+
+---
+
+## ⚠️ 🧪 Validation Example
+
+If invalid request:
+
+```json
+{
+  "title": ""
+}
+```
+
+#### Response:
+
+```json
+{
+  "title": "Title is required"
+}
+```
+
+---
+
+## ❗ 🚨 Error Handling
+
+Example:
+
+```json
+{
+  "message": "Task not found"
+}
+```
+
+Handled globally using:
+
+* `@RestControllerAdvice`
+* Custom Exceptions
+
+---
+
+## 🧪 🧰 Testing APIs
+
+You can test APIs using:
+
+* Postman
+* curl
+
+### Example:
+
+```bash
+curl -X POST http://localhost:8080/tasks \
+-H "Content-Type: application/json" \
+-d '{"title":"Task 1","description":"Test","completed":false}'
+```
+
+---
+
+## 💡 🔥 Features Implemented
+
+* CRUD Operations
+* MongoDB Integration
+* Validation
+* Global Exception Handling
+* Clean Architecture
+
+---
+
+## 🚀 🔮 Future Improvements
+
+* JWT Authentication
+* Swagger API Documentation
+* Pagination & Sorting
+* Logging
+* Docker Support
+* Deployment (AWS / Render)
+
+---
+
+## 👨‍💻 Author
+
+**Vishnu V R**
+
+* GitHub: https://github.com/TheCoderLegend
+
+---
